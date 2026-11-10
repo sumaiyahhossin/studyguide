@@ -161,6 +161,22 @@ linear-gradient(180deg,#79697b58 0%,#323c58b8 13%,#162a43e8 43%,#0a1a30 100%);bo
 #qaLock .qa-key{background:#ffffff14!important;border:1px solid #ffcee05b!important;color:#fff5fa!important}
 @media(max-width:650px){#vaultGarden .moonGlow{top:9%;right:-8%;width:245px}#vaultGarden .moon{top:17%;right:15%;width:85px}#vaultGarden .forest{height:40%}#vaultGarden .lagoon{height:35%}.hero h1{font-size:clamp(37px,8vw,53px)!important;word-spacing:.13em!important}}
 @media(prefers-reduced-motion:reduce){#vaultGarden:before,#vaultGarden .moonGlow,#vaultGarden .cloud,#vaultGarden .ray,#vaultGarden .lagoon:before,#vaultGarden .lagoon:after,#vaultGarden .mist{animation:none!important}}
+/* 2026 cinematic vault upgrade: deeper nighttime, luminous landscape, subtle animation. */
+#vaultGarden{background:radial-gradient(ellipse 60% 28% at 70% 61%,#b98c9580,transparent 78%),linear-gradient(180deg,#050913 0%,#10152c 24%,#24213d 47%,#5b455d 63%,#162f42 74%,#061322 100%)!important}
+#vaultGarden:before{background:conic-gradient(from 90deg at 63% 50%,transparent,#625f9a3b,transparent,#c69da039,transparent)!important;filter:blur(95px)!important;opacity:.55!important}
+#vaultGarden .moon{right:21%!important;top:15%!important;width:clamp(95px,13vw,185px)!important;background:radial-gradient(circle at 35% 35%,#fff9eb 0%,#f5e8d4 58%,#ccbcba 100%)!important;box-shadow:0 0 40px #fff5da99,0 0 115px #e6c2d57f,0 0 290px #bc95c743!important}
+#vaultGarden .moonGlow{right:13%!important;top:5%!important;width:clamp(270px,34vw,530px)!important;opacity:.9!important}
+#vaultGarden .lagoon{height:42%!important;background:radial-gradient(ellipse 15% 90% at 71% 0%,#e9b7c754,transparent 78%),linear-gradient(180deg,#9f7f916a,#183f58 20%,#092a44 60%,#050f20)!important}
+#vaultGarden .forest{height:47%!important;opacity:.98!important;filter:drop-shadow(0 -9px 20px #040d1a9f)!important}
+#vaultGarden .mist{opacity:.38!important;filter:blur(55px)!important}
+#vaultGarden .shade{box-shadow:inset 0 0 160px #020714c9!important}
+#vaultGarden .sky-film{background:linear-gradient(180deg,#05081738,transparent 30%,#050b188a 100%)!important}
+#vaultGardenCanvas{opacity:.87!important}
+.hero,.card,.lesson-panel{background:linear-gradient(140deg,#121a2ce8,#212238db 55%,#2c2438d9)!important;border-color:#cdb4bd53!important;box-shadow:0 20px 70px #01060cc4,inset 0 1px #ffffff0e!important}
+.side{background:linear-gradient(175deg,#0c1527f4,#181d30f2)!important;border-color:#bba7ba55!important}
+.hero h1{color:#fff4eb!important;text-shadow:0 3px 35px #f6d1d02b!important}
+.lesson-panel{backdrop-filter:blur(14px)!important}
+@media(max-width:650px){#vaultGarden .moon{right:16%!important;top:13%!important;width:102px!important}#vaultGarden .moonGlow{right:-8%!important;top:5%!important;width:270px!important}#vaultGarden .forest{height:38%!important}}
 </style><style id="readerStatusStyling2026">.narration-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.reader-status{font-size:13px;color:#f1c7dd;letter-spacing:.01em}.lesson-readable{min-width:0}</style><style id="naturalReader2026Styling">.narration-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px}.voice-mode-label{font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:750;color:#e7c9df}.voice-mode-select{appearance:auto;min-width:190px;border:1px solid #e3bbda92;color:#fff0fa;background:#29203af5;padding:10px 14px;border-radius:10px;font:600 14px/1.2 system-ui,sans-serif;cursor:pointer}.reader-status{flex-basis:100%;font-size:13px;line-height:1.6;color:#f0d1df;min-height:20px}</style></head><body><div id="vaultGarden" aria-hidden="true"><div class="sky-film"></div><div class="aurora"></div><div class="moonGlow"></div><div class="moon"></div><div class="cloud"></div><div class="cloud two"></div><div class="ray"></div><div class="lagoon"></div><svg class="forest" viewBox="0 0 1440 450" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg"><defs>
 <linearGradient id="lagoonFar" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#63526e" stop-opacity=".86"/><stop offset="1" stop-color="#393c56"/></linearGradient>
 <linearGradient id="lagoonNear" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#293047"/><stop offset="1" stop-color="#0b1c34"/></linearGradient>
@@ -213,7 +229,7 @@ let narrationVoiceMode=localStorage.getItem('qa28-voice-mode')==='device'?'devic
 async function lessonNarrate(){
 if(!narrationActive)return;
 const root=document.querySelector('#lessonStage .lesson-readable');if(!root){stopLessonNarration();return}
-const selected=[...root.querySelectorAll('h3,.lesson-copy p,.lesson-copy li,.lesson-objectives li,.lesson-readable>p,.recall-question,.recall-help')];
+const selected=[...root.querySelectorAll('.lesson-copy p,.lesson-copy li,.lesson-objectives li,.lesson-readable>p,.recall-question')];
 const spoken=selected.map(e=>e.textContent.replace(/\s+/g,' ').trim()).filter(Boolean).join('. ');
 if(!spoken){stopLessonNarration();return}
 const token=++narrationToken,controller=new AbortController();narrationAbort=controller;
@@ -230,7 +246,7 @@ ok=await browserNarration(spoken,controller.signal);
 if(!narrationActive||controller.signal.aborted||token!==narrationToken)return;
 if(!ok){
 narrationActive=false;
-if(mode==='natural'&&!document.getElementById('readerStatus')?.textContent.includes('unavailable'))status('Natural AI voice could not play. Choose Device voice above if you prefer.');
+if(mode==='natural'){status('Natural voice could not load here. Switching to your device voice.');narrationVoiceMode='device';localStorage.setItem('qa28-voice-mode','device');const menu=document.getElementById('qaVoiceMode');if(menu)menu.value='device';if(await browserNarration(spoken,controller.signal))ok=true;}
 else if(mode==='device')status('Device voice unavailable. Tap Listen to retry.');
 const b=document.getElementById('readStep');if(b)b.textContent='▶ Retry reading';
 return;
@@ -263,7 +279,7 @@ let modelPromise=null,audioContext=null,audioGain=null,activeSource=null,latestE
 const cleanText=t=>t.replace(/[✿✧★☆•▪●◦]/g,' ').replace(/[→⇒]/g,' leads to ').replace(/\s+/g,' ').trim();
 function chunks(text,max){const sentences=cleanText(text).match(/[^.!?]+[.!?]+|[^.!?]+$/g)||[cleanText(text)];const out=[];let current='';for(const sentence of sentences){const words=sentence.trim().split(/\s+/);for(const word of words){if((current+' '+word).length>max&&current){out.push(current.trim());current=''}current+=(current?' ':'')+word}if(current.length>=max*.7){out.push(current.trim());current=''}}if(current.trim())out.push(current.trim());return out}
 function unlock(){try{const A=window.AudioContext||window.webkitAudioContext;if(!A)throw Error('Web Audio unsupported');if(!audioContext){audioContext=new A();audioGain=audioContext.createGain();audioGain.gain.value=.95;audioGain.connect(audioContext.destination)}audioContext.resume().catch(()=>{});const s=audioContext.createBufferSource();s.buffer=audioContext.createBuffer(1,1,audioContext.sampleRate);s.connect(audioGain);s.start(0);return true}catch(e){latestError=e.message||String(e);return false}}
-async function load(onStatus){if(!modelPromise)modelPromise=(async()=>{let m;try{m=await import('https://esm.sh/kokoro-js@1.2.1?bundle')}catch(e){m=await import('https://cdn.jsdelivr.net/npm/kokoro-js@1.2.1/+esm')}if(!m.KokoroTTS)throw Error('Natural voice library failed to load');const progress=event=>{if(!onStatus)return;if(typeof event?.progress==='number')onStatus('Downloading natural voice · '+Math.max(0,Math.min(100,Math.floor(event.progress)))+'%');else if(event?.status==='initiate')onStatus('Preparing natural voice model…')};return m.KokoroTTS.from_pretrained('onnx-community/Kokoro-82M-v1.0-ONNX',{dtype:'q8',device:'wasm',progress_callback:progress})})().catch(e=>{modelPromise=null;throw e});return modelPromise}
+async function load(onStatus){if(!modelPromise)modelPromise=(async()=>{let m;try{m=await import('https://cdn.jsdelivr.net/npm/kokoro-js@1.2.1/+esm')}catch(e){m=await import('https://esm.sh/kokoro-js@1.2.1?bundle&target=es2022')}if(!m.KokoroTTS)throw Error('Natural voice library failed to load');const progress=event=>{if(!onStatus)return;if(typeof event?.progress==='number')onStatus('Downloading natural voice · '+Math.max(0,Math.min(100,Math.floor(event.progress)))+'%');else if(event?.status==='initiate')onStatus('Preparing natural voice model…')};return m.KokoroTTS.from_pretrained('onnx-community/Kokoro-82M-v1.0-ONNX',{dtype:'q8',device:'wasm',progress_callback:progress})})().catch(e=>{modelPromise=null;throw e});return modelPromise}
 function stop(){if(activeSource){try{activeSource.stop(0)}catch(e){}activeSource.disconnect();activeSource=null}}
 function playBuffer(buffer,signal){return new Promise((resolve)=>{let settled=false;const source=audioContext.createBufferSource();source.buffer=buffer;source.connect(audioGain);activeSource=source;const finish=ok=>{if(settled)return;settled=true;if(signal)signal.removeEventListener('abort',abort);if(activeSource===source)activeSource=null;try{source.disconnect()}catch(e){}resolve(ok)};const abort=()=>{try{source.stop(0)}catch(e){}finish(false)};if(signal)signal.addEventListener('abort',abort,{once:true});source.onended=()=>finish(true);try{source.start(0)}catch(e){latestError=e.message||String(e);finish(false)}})}
 async function speak(text,{signal,onStatus}={}){
