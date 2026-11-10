@@ -1,0 +1,1 @@
+Open index.html in any modern browser. Works offline. Progress is stored in browser localStorage; export to back up. Original PDF text is included; original PDF binaries are not redistributed in this ZIP.
